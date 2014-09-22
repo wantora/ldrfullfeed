@@ -1254,7 +1254,11 @@ function sanitize(node) {
       return res.join(' ');
     })();
     tag = escapeHTML(tag);
-    return '<' + tag + ' ' + attr + '>' + contents.join('') + '</' + tag + '>';
+    if (contents.length === 0) {
+      return '<' + tag + ' ' + attr + ' />';
+    } else {
+      return '<' + tag + ' ' + attr + '>' + contents.join('') + '</' + tag + '>';
+    }
   } else if (node.nodeType === 3) {
     return escapeHTML(node.nodeValue);
   }
