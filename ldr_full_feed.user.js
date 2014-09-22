@@ -1198,12 +1198,12 @@ function createDocumentFromString(source){
 }
 
 // %o %s %i
-function log() {if(unsafeWindow.console && DEBUG) unsafeWindow.console.log.apply(unsafeWindow.console, Array.slice(arguments));}
-function group() {if(unsafeWindow.console && DEBUG) unsafeWindow.console.group.apply(unsafeWindow.console, Array.slice(arguments))}
-function groupEnd() {if(unsafeWindow.console &&DEBUG) unsafeWindow.console.groupEnd.apply(unsafeWindow.console, arguments);}
+function log() {if(console && DEBUG) console.log.apply(console, arguments);}
+function group() {if(console && DEBUG) console.group.apply(console, arguments)}
+function groupEnd() {if(console &&DEBUG) console.groupEnd.apply(console, arguments);}
 
-function time(name) {if(unsafeWindow.console.time && DEBUG) unsafeWindow.console.time.apply(unsafeWindow.console, arguments)}
-function timeEnd(name) {if(unsafeWindow.console.timeEnd && DEBUG) unsafeWindow.console.timeEnd.apply(console, arguments)}
+function time() {if(console.time && DEBUG) console.time.apply(console, arguments)}
+function timeEnd() {if(console.timeEnd && DEBUG) console.timeEnd.apply(console, arguments)}
 
 // http://d.hatena.ne.jp/os0x/20080228/1204210085
 // a little modified
