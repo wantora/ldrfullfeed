@@ -600,6 +600,23 @@ window.FullFeed = {
       });
     });
   })();
+  // Filter: Remove iframe Elements
+  (function(){
+    if (REMOVE_IFRAME) {
+      window.FullFeed.addFilter(function(nodes, url){
+        filter(nodes, function(e){
+          var n = e.nodeName.toLowerCase();
+          if (n === "iframe") return false;
+          return true;
+        });
+        nodes.forEach(function(e){
+          $X('descendant-or-self::iframe', e).forEach(function(i){
+            i.parentNode.removeChild(i);
+          });
+        });
+      });
+    }
+  })();
 })();
 
 // [Cache]
