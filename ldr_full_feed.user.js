@@ -465,17 +465,17 @@ FullFeed.register = function(){
     w.register_hook("BEFORE_PRINTFEED", exportGMFunc(beforePrinteed));
   function watchWriter(feed){
     var state = w.State;
-    state.writer.watch("complete", function(key, oldVal, newVal){
-      state.writer2.watch("complete", function(key, oldVal, newVal){
+    state.writer.watch("complete", exportFunction(function(key, oldVal, newVal){
+      state.writer2.watch("complete", exportFunction(function(key, oldVal, newVal){
         if(! state.writer.complete){
           watchWriter(feed);
           return newVal;
         }
         addListener();
         return newVal;
-      });
+      }, unsafeWindow));
       return newVal;
-    })
+    }, unsafeWindow))
   }
   function addListener(){
     $X('id("right_body")//img[contains(concat(" ",@class," ")," gm_fullfeed_icon_disable ")]', document)
