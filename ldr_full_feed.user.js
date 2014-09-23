@@ -1176,14 +1176,6 @@ function relativeToAbsolutePath(htmldoc, base){
     .forEach(function(elm) {
     if(elm.getAttribute("src")) elm.src = resolver(elm.getAttribute("src"));
   });
-  $X("descendant-or-self::embed", htmldoc)
-    .forEach(function(elm) {
-    if(elm.getAttribute("src")) elm.src = resolver(elm.getAttribute("src"));
-  });
-  $X("descendant-or-self::object", htmldoc)
-    .forEach(function(elm) {
-    if(elm.getAttribute("data")) elm.data = resolver(elm.getAttribute("data"));
-  });
 }
 
 function path_resolver(base){
