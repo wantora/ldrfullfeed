@@ -581,6 +581,25 @@ window.FullFeed = {
       });
     }
   })();
+  // Filter: Remove Form Elements
+  (function(){
+    var form_elements = ["form", "label", "input", "button", "select", "textarea", "fieldset", "legend"];
+    var form_hash = {}; form_elements.forEach(function(n){ form_hash[n] = true; });
+    var form_xpath = 'descendant-or-self::*[' + form_elements.map(function(n){ return 'self::' + n; }).join(' or ') + ']';
+
+    window.FullFeed.addFilter(function(nodes, url){
+      filter(nodes, function(e){
+        var n = e.nodeName.toLowerCase();
+        if (form_hash[n]) return false;
+        return true;
+      });
+      nodes.forEach(function(e){
+        $X(form_xpath, e).forEach(function(i){
+          i.parentNode.removeChild(i);
+        });
+      });
+    });
+  })();
 })();
 
 // [Cache]
